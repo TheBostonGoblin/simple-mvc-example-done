@@ -1,11 +1,8 @@
 // pull in our models. This will automatically load the index.js from that folder
-const modelCat = require('../models/Cat.js');
-const modelDog = require("../models/Dog.js");
-const models = require("../models");
+const models = require('../models');
 // get the Cat model
 const { Cat } = models;
 const { Dog } = models;
-
 
 // default fake data so that we have something to work with until we make a real Cat
 const defaultData = {
@@ -15,7 +12,6 @@ const defaultData = {
 
 // object for us to keep track of the last Cat we made and dynamically update it sometimes
 let lastAdded = new Cat(defaultData);
-
 
 // Function to handle rendering the index page.
 const hostIndex = (req, res) => {
@@ -301,7 +297,7 @@ const increaseAge = async (req, res) => {
        that will find a single document in the database that matches the search parameters.
        This function is faster, as it will stop searching after it finds one document that
        matches the parameters. The downside is you cannot get multiple responses with it.
- 
+
        One of three things will occur when trying to findOne in the database.
         1) An error will be thrown, which will stop execution of the try block and move to
             the catch block.
@@ -310,7 +306,6 @@ const increaseAge = async (req, res) => {
         3) Everything works, and an object matching the search is found.
     */
     doc = await Dog.findOne({ name: req.body.name }).exec();
-
 
     console.dir(doc);
   } catch (err) {
@@ -339,7 +334,7 @@ const increaseAge = async (req, res) => {
     console.log(err);
     return res.status(500).json({ error: 'Something went wrong' });
   });
-
+  return res.status(500).json({ error: 'Something went wrong' });
 };
 
 // Function to handle searching a cat by name.
@@ -389,8 +384,6 @@ const searchName = async (req, res) => {
   return res.json({ name: doc.name, beds: doc.bedsOwned });
 };
 
-
-
 /* A function for updating the last cat added to the database.
    Usually database updates would be a more involved process, involving finding
    the right element in the database based on query, modifying it, and updating
@@ -435,8 +428,6 @@ const notFound = (req, res) => {
   });
 };
 
-
-
 // export the relevant public controller functions
 module.exports = {
   index: hostIndex,
@@ -451,5 +442,5 @@ module.exports = {
   notFound,
   setDog,
   searchDogByName,
-  increaseAge
+  increaseAge,
 };
