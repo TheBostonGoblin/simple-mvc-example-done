@@ -252,7 +252,6 @@ const searchDogByName = async (req, res) => {
 };
 
 const increaseAge = async (req, res) => {
-
   if (!req.body.name) {
     return res.status(400).json({ error: 'Name is required to Increase Age' });
   }
@@ -275,7 +274,7 @@ const increaseAge = async (req, res) => {
 
   doc.age++;
   doc.save();
-  
+  return res.status(204);
 };
 
 // Function to handle searching a cat by name.
