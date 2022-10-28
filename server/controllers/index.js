@@ -274,21 +274,8 @@ const increaseAge = async (req, res) => {
   }
 
   doc.age++;
-  const savePromise = doc.save();
-
-  // If we successfully save/update them in the database, send back the cat's info.
-  savePromise.then(() => res.json({
-    name: doc.name,
-    breed: doc.breed,
-    age: doc.age,
-  }));
-
-  // If something goes wrong saving to the database, log the error and send a message to the client.
-  savePromise.catch((err) => {
-    console.log(err);
-    return res.status(500).json({ error: 'Something went wrong' });
-  });
-  return res.status(500).json({ error: 'Something went wrong' });
+  doc.save();
+  
 };
 
 // Function to handle searching a cat by name.
